@@ -6,7 +6,7 @@
     conwaytl.c
  Goals:
  
-    Conway simulation.
+    Conway's game of life simulation.
 
  Usage example:
  
