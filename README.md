@@ -27,5 +27,5 @@
 	
 Example:
 
-  ![test example](./example_conway.png)
+  ![test example](./example1.png)
   ![test example](./example2.png)
