@@ -37,16 +37,13 @@ enum PATTERN_TYPE PTYPE = RANDOMT ;
 char * whichpattern = 0;
 //typedef 	int board_t; // square board 8X8 with toroidal topology.
 
-
-
-
 void generation(int * grids);
 
 void show(int * grids){
     for(int i=0;i<N;i++){
         for(int j=0; j<N; j++){
-            if (*(grids+(i*N+j)) == 1)
-	        printf(" X ");
+            if (*(grids+(i*N+j)) == 1){
+		printf(" X ");
             else
                 printf(" . ");
         }
@@ -58,7 +55,6 @@ void show(int * grids){
 void display(int * grids){
 
 	printf("\033[2J"); // clear window
-
 	int acc = 0;
 	while(acc>=0){
 		acc++ ;
@@ -70,12 +66,9 @@ void display(int * grids){
 	        fflush(stdout);   // roll back to print next generation results at the same lines 
 		generation(grids);
 		usleep(500000);
-	
-
 	}
 
 }
-
 
 int circlepos(int abspos, int relpos){
     // for(int i=-WD;i<WD+2;i++){
@@ -88,8 +81,7 @@ int circlepos(int abspos, int relpos){
 int dice(int num){
     //srand(time(NULL)); // use current time as seed for random generator
     //int random_variable = rand();
-    
- 
+     
     // roll a 6-sided die 20 or 1 times, num==6;
     int x;
     for (int n=0; n != 1; ++n) {
@@ -110,6 +102,7 @@ static void init(int PTYPE, int *grids){
 	switch (PTYPE)
 	{
 		int whatoni, whatonj, whaton, whatond;
+		
 		case 0: 
 		whaton = 0;
 	        for(int i=0; i<N; i++)
@@ -117,12 +110,10 @@ static void init(int PTYPE, int *grids){
 	                {
 	                    whaton = rand()< (RAND_MAX/10) ? 1: 0;
 	                    *(grids++) = whaton;
-	                }
-
-		
+	                }	
 		break;
-		case 1: 
 		
+		case 1: 
 	        whatoni = dice(N)-1;
 	        whatonj = dice(N)-1;
 	        whatond = rand()< (RAND_MAX/10) ? 1: 0;
@@ -140,7 +131,6 @@ static void init(int PTYPE, int *grids){
                 break;
 			
 		case 2:
-			
 	        whatoni = dice(N)-1;
 	        whatonj = dice(N)-1;
 	        whatond = rand()< (RAND_MAX/10) ? 1: 0;
@@ -160,6 +150,7 @@ static void init(int PTYPE, int *grids){
 	            }
 	        }
 		break;
+		
 		case 4:
 		whatoni = 3;
 		whatonj = 3;
@@ -180,13 +171,13 @@ static void init(int PTYPE, int *grids){
 	            }
 	        }
 		break;
+		
 		case 5:
 	        whatoni = 3;
 	        whatonj = 3;
 	        whatond = 1;
 	        if (whatond==1){
-            
-	                for(int j=-WD;j<WD+1;j++){
+        	    for(int j=-WD;j<WD+1;j++){
 	                    int gdpos = circlepos(whatoni, 0)*N + circlepos(whatonj+j,0);
 	                    *(grids+gdpos) = 1;
 	                }
@@ -194,7 +185,7 @@ static void init(int PTYPE, int *grids){
 	                *(grids+gdpos) = 1;
 	                gdpos = circlepos(whatoni-2, 0)*N + circlepos(whatonj,0);
 	                *(grids+gdpos) = 1;
-	        }else{
+	            }else{
 	                for(int i=-WD;i<WD+1;i++){
 	                    int gdpos = circlepos(whatoni+i, 0)*N + circlepos(whatonj,0);
 	                    *(grids+gdpos) = 1;
@@ -210,14 +201,11 @@ static void init(int PTYPE, int *grids){
 	                {
 	                    whaton = rand()< (RAND_MAX/10) ? 1: 0;
 	                    *(grids++) = whaton;
-
 	                }
-
 	        }
 		break;
 		
-	} // finish the switch here.
-
+	} // finish the switch here
 	
 }
 
@@ -239,7 +227,6 @@ void generation(int * grids){
             }
             if (*(grids+selfpos)==1) lifeval--;
             if (lifeval==3 || (lifeval==2 && *(grids +selfpos)==1 )) *(newgrid +selfpos) = 1;
-
     
         }
     }
