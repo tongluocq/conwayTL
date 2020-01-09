@@ -13,6 +13,7 @@
 	only tested under linux environment.
 	compile:
 	 		gcc -o conwaytl  -std=c99 -Wall conwaytl.c
+			gcc -o conwaytl  -std=c99 -Wall  -Wextra -pedantic-errors  conwaytl.c
 	run:
 			./conwaytl toad
 			./conwaytl glidER
