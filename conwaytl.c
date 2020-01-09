@@ -12,7 +12,7 @@
 /*
 
  Goals:
-    Conway simulation.
+    Conway's game of life simulation.
 
  Usage example:
 	only tested under linux environment.
