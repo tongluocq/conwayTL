@@ -46,7 +46,7 @@ void show(int * grids){
     for(int i=0;i<N;i++){
         for(int j=0; j<N; j++){
             if (*(grids+(i*N+j)) == 1)
-				printf(" * ");
+	        printf(" X ");
             else
                 printf(" . ");
         }
@@ -67,7 +67,7 @@ void display(int * grids){
 		printf("\033[5;0H"); // cursor to 5 rows below for pattern display 
 		
 		show(grids);
-	    fflush(stdout);   // roll back to print next generation results at the same lines 
+	        fflush(stdout);   // roll back to print next generation results at the same lines 
 		generation(grids);
 		usleep(500000);
 	
@@ -98,7 +98,7 @@ int dice(int num){
             // printf("%d %d \n", 1u, ((RAND_MAX + 1u)/6));
             x = 1 + rand()/((RAND_MAX + 1u)/num); // Note: 1+rand()%6 is biased
         }
-        //printf(" what is x: %d ",  x); 
+    //printf(" what is x: %d ",  x); 
     }
     return x;
 }
@@ -111,16 +111,16 @@ static void init(int PTYPE, int *grids){
 	{
 		int whatoni, whatonj, whaton, whatond;
 		case 0: 
-			whaton = 0;
+		whaton = 0;
 	        for(int i=0; i<N; i++)
-				for(int i=0; i<N; i++)
+			for(int i=0; i<N; i++)
 	                {
 	                    whaton = rand()< (RAND_MAX/10) ? 1: 0;
 	                    *(grids++) = whaton;
 	                }
 
 		
-			break;
+		break;
 		case 1: 
 		
 	        whatoni = dice(N)-1;
@@ -137,7 +137,7 @@ static void init(int PTYPE, int *grids){
 	                *(grids+gdpos) = 1;
 	            }
 	        }
-            break;
+                break;
 			
 		case 2:
 			
@@ -159,10 +159,10 @@ static void init(int PTYPE, int *grids){
 	                }
 	            }
 	        }
-			break;
+		break;
 		case 4:
-			whatoni = 3;
-			whatonj = 3;
+		whatoni = 3;
+		whatonj = 3;
 	        whatond = 1;
 	        if (whatond==1){
 	            for(int ii=0;ii<=1;ii++){
@@ -179,7 +179,7 @@ static void init(int PTYPE, int *grids){
 	                }
 	            }
 	        }
-			break;
+		break;
 		case 5:
 	        whatoni = 3;
 	        whatonj = 3;
@@ -201,7 +201,7 @@ static void init(int PTYPE, int *grids){
 	                }
             
 	        }
-		    break;
+		break;
 		default:
 	        whaton = 0;
 	        for(int i=0; i<N; i++)
@@ -214,7 +214,7 @@ static void init(int PTYPE, int *grids){
 	                }
 
 	        }
-			break;
+		break;
 		
 	} // finish the switch here.
 
@@ -261,7 +261,7 @@ char * lowercase2(const char * commd){
     cmm = (char*) malloc((strlen(commd)+1) * sizeof(char));
     for(int i=0; commd[i]; i++) {
         cmm[i] = tolower(commd[i])  ;
-        //printf("%c\n", cmm[i]);
+    //printf("%c\n", cmm[i]);
        
     }
     //printf("over\n");
@@ -276,21 +276,21 @@ char * lowercase2(const char * commd){
 int main(int argc, const char* argv[]){
 
     srand(100000);
- 	char * command_title ;
+    char * command_title ;
     if (argc>2 || argc==1){
-		command_title = "Randomt";
-		whichpattern = "Random";
+        command_title = "Randomt";
+	whichpattern = "Random";
     }else{
-		command_title = lowercase2(argv[1]);
-		whichpattern = (char *) argv[1];
+	command_title = lowercase2(argv[1]);
+	whichpattern = (char *) argv[1];
     }
 
-	// set the pattern type:
+    // set the pattern type:
     if (strcmp(command_title, "blinker") == 0) {
         PTYPE = BLINKER;
-    }else     if (strcmp(command_title, "toad")==0){
+    }else if (strcmp(command_title, "toad")==0){
         PTYPE = TOAD;
-    }else    if (strcmp(command_title, "beacon")==0){
+    }else if (strcmp(command_title, "beacon")==0){
         PTYPE = BEACON;
     }else if (strcmp(command_title, "glider")==0){
         PTYPE = GLIDER;
@@ -301,8 +301,8 @@ int main(int argc, const char* argv[]){
     grids = (int*) malloc((N*N) * sizeof(int));
     init(PTYPE, grids);
 	
-	// here is main running of code, display all results:
-	display(grids);
+    // here is main running of code, display all results:
+    display(grids);
     free(grids);
     printf("\n end of game\n\n");
 
